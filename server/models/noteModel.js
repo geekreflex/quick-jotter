@@ -8,6 +8,11 @@ const noteSchema = mongoose.Schema(
     content: {
       type: String,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
   { timestamps: true }
 );
