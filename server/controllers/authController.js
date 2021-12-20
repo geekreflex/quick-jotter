@@ -1,5 +1,6 @@
 const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/authModel');
+const generateToken = require('../utils/generateToken');
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 const googleLogin = async (req, res) => {
@@ -15,7 +16,14 @@ const googleLogin = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    res.status(201).json(user);
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      picture: user.picture,
+      token: generateToken(user._id),
+      xidf: 'existing',
+    });
   } else {
     const newUser = await User.create({
       name,
@@ -24,7 +32,14 @@ const googleLogin = async (req, res) => {
     });
 
     if (newUser) {
-      return res.status(201).json(newUser);
+      return res.status(201).json({
+        _id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        picture: newUser.picture,
+        token: generateToken(newUser._id),
+        xidf: 'new',
+      });
     }
   }
 };

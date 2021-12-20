@@ -1,20 +1,13 @@
 import { GoogleLogin } from 'react-google-login';
-import axios from 'axios';
+import { googleAuth } from './features/userSlice';
+import { useDispatch } from 'react-redux';
 
 function App() {
-  const handleLogin = async (response) => {
-    const res = await fetch(`http://localhost:7000/api/auth/google`, {
-      method: 'POST',
-      body: JSON.stringify({
-        token: response.tokenId,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  const dispatch = useDispatch();
 
-    const data = await res.json();
-    console.log(data);
+  const handleLogin = async (response) => {
+    const payload = { token: response.tokenId };
+    dispatch(googleAuth(payload));
   };
 
   return (

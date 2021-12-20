@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
+import { getUserInfoFromStorage } from './features/userSlice';
+
+store.dispatch(getUserInfoFromStorage());
 
 ReactDOM.render(
   <React.StrictMode>
