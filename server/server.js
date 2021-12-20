@@ -1,13 +1,18 @@
 require('dotenv').config();
+const connectDB = require('./config/db');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+
+connectDB();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(cors());
-}
+const authRoute = require('./routes/authRoute');
+
+app.use('/api/auth', authRoute);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));
