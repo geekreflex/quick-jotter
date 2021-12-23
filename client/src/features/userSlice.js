@@ -10,8 +10,8 @@ const initialState = {
   error: null,
 };
 
-export const googleAuth = createAsyncThunk(
-  'user/googleAuth',
+export const loginWithGoogle = createAsyncThunk(
+  'user/loginWithGoogle',
   async (payload, thunkAPI) => {
     try {
       const config = {
@@ -21,7 +21,7 @@ export const googleAuth = createAsyncThunk(
       };
 
       const { data } = await axios.post(
-        `${BASE_URL}/auth/google`,
+        `${BASE_URL}/api/auth/google`,
         payload,
         config
       );
@@ -63,10 +63,10 @@ export const userSlice = createSlice({
   extraReducers: {
     // google auth
 
-    [googleAuth.pending]: (state) => {
+    [loginWithGoogle.pending]: (state) => {
       state.status = 'idle';
     },
-    [googleAuth.fulfilled]: (state, action) => {
+    [loginWithGoogle.fulfilled]: (state, action) => {
       state.status = 'idle';
       state.user = action.payload;
       localStorage.setItem(KEY + 'userInfo', JSON.stringify(action.payload));
@@ -74,7 +74,7 @@ export const userSlice = createSlice({
       window.location.href = '/';
       console.log(action.payload);
     },
-    [googleAuth.rejected]: (state, action) => {
+    [loginWithGoogle.rejected]: (state, action) => {
       state.status = 'idle';
       state.error = action.payload;
     },

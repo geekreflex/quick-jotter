@@ -11,8 +11,10 @@ app.use(express.json());
 app.use(cors());
 
 const authRoute = require('./routes/authRoute');
+const noteRoute = require('./routes/noteRoute');
 
 app.use('/api/auth', authRoute);
+app.use('/api/notes', noteRoute);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));

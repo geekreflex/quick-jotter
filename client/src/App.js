@@ -1,25 +1,32 @@
-import { GoogleLogin } from 'react-google-login';
-import { googleAuth } from './features/userSlice';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Welcome from './views/Welcome';
+import Dashboard from './views/Dashboard';
+import { ProtectedRoute, PublicRoute } from './helpers/authRoutes';
 
 function App() {
-  const dispatch = useDispatch();
-
-  const handleLogin = async (response) => {
-    const payload = { token: response.tokenId };
-    dispatch(googleAuth(payload));
-  };
-
   return (
     <div className="App">
-      <h1>Hello</h1>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Login"
-        onSuccess={handleLogin}
-        onFailure={handleLogin}
-        cookiePolicy={'single_host_origin'}
-      />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <Welcome />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
