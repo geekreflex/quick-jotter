@@ -49,8 +49,11 @@ const Search = styled.div`
   display: flex;
   align-items: center;
   box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
+  max-width: 100%;
+  width: 500px;
+
   input {
-    width: 500px;
+    flex: 1;
     height: 60px;
     margin: 0 5px;
     padding: 0 10px;
@@ -78,11 +81,11 @@ const Search = styled.div`
 const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
 `;
 
 const Inner = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
 `;
 

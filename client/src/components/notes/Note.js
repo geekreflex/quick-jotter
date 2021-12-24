@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Toolbar from './Toolbar';
 
 const Note = ({ note }) => {
+  const [visible, setVisible] = useState(false);
+
   const truncate = (note) => {
     if (note.length > 100) {
       let short = note.slice(0, 300);
@@ -11,7 +14,14 @@ const Note = ({ note }) => {
   };
 
   return (
-    <Wrap>
+    <Wrap
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+      style={{
+        backgroundColor:
+          note.color && note.color !== 'default' ? note.color : '#fff',
+      }}
+    >
       <NoteMain>
         <NoteTitle>
           <h3>{note.title}</h3>
@@ -20,7 +30,7 @@ const Note = ({ note }) => {
           <p>{truncate(note.content)}</p>
         </NoteContent>
       </NoteMain>
-      <Toolbar />
+      <Toolbar visible={visible} />
     </Wrap>
   );
 };
@@ -33,9 +43,9 @@ const Wrap = styled.div`
   background: #fff;
   border-radius: 5px;
   max-width: 250px;
+  min-width: 250px;
   margin-top: 20px;
   display: flex;
-  padding: 20px;
   flex-direction: column;
   box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
   cursor: default;
@@ -55,7 +65,7 @@ const Wrap = styled.div`
 `;
 
 const NoteMain = styled.div`
-  margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const NoteTitle = styled.div`

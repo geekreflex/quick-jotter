@@ -1,11 +1,12 @@
 const Note = require('../models/noteModel');
 
 const createNote = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, color } = req.body;
 
   const note = new Note({
     title: title || '',
     content: content || '',
+    color: color || 'default',
     user: req.user._id,
   });
 

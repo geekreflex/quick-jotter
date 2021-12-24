@@ -5,12 +5,10 @@ import Menu from './Menu';
 const Header = () => {
   return (
     <Wrap>
-      <Container>
-        <Inner>
-          <Menu />
-          <Avatar />
-        </Inner>
-      </Container>
+      <Inner>
+        <Menu />
+        <Avatar />
+      </Inner>
     </Wrap>
   );
 };
@@ -24,17 +22,12 @@ const Wrap = styled.div`
   left: 0;
 `;
 
-const Container = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-`;
-
 const Inner = styled.div`
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px;
 `;
 
 export default Header;
