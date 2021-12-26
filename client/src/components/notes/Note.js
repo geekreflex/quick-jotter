@@ -13,24 +13,26 @@ const Note = ({ note }) => {
     return note;
   };
 
+  const handleNoteClick = () => {
+    console.log('note clicked');
+  };
+
   return (
     <Wrap
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
+      onClick={handleNoteClick}
       style={{
+        color: note.color && note.color !== 'default' ? '#fff' : '',
         backgroundColor:
           note.color && note.color !== 'default' ? note.color : '#fff',
       }}
     >
       <NoteMain>
-        <NoteTitle>
-          <h3>{note.title}</h3>
-        </NoteTitle>
-        <NoteContent>
-          <p>{truncate(note.content)}</p>
-        </NoteContent>
+        <NoteTitle>{note.title}</NoteTitle>
+        <NoteContent>{truncate(note.content)}</NoteContent>
       </NoteMain>
-      <Toolbar visible={visible} />
+      <Toolbar visible={visible} light={note.color === 'default'} />
     </Wrap>
   );
 };
@@ -54,24 +56,25 @@ const Wrap = styled.div`
   &:hover {
     border: 1px solid #eee;
   }
-
-  p {
-    width: 100%;
-    white-space: pre-wrap;
-    overflow: hidden;
-    max-height: 300px;
-    word-wrap: break-word;
-  }
 `;
 
 const NoteMain = styled.div`
   padding: 20px;
 `;
 
-const NoteTitle = styled.div`
+const NoteTitle = styled.h3`
   margin-bottom: 10px;
+  font-size: 0.867rem;
+  font-weight: 600;
 `;
 
-const NoteContent = styled.div``;
+const NoteContent = styled.p`
+  width: 100%;
+  white-space: pre-wrap;
+  overflow: hidden;
+  /* max-height: 300px; */
+  word-wrap: break-word;
+  font-size: 14px;
+`;
 
 export default Note;

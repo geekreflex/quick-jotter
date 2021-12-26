@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Welcome from './views/Welcome';
 import Dashboard from './views/Dashboard';
 import { ProtectedRoute, PublicRoute } from './helpers/authRoutes';
+import Search from './views/Search';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path="/login"
             element={
               <PublicRoute>
                 <Welcome />
@@ -17,13 +18,15 @@ function App() {
             }
           />
           <Route
-            path="/dashboard"
+            path="/"
             element={
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route path="search" element={<Search />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

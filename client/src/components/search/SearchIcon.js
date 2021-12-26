@@ -1,10 +1,17 @@
-import { IoMenuSharp } from 'react-icons/io5';
+import { IoSearch } from 'react-icons/io5';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-const Menu = () => {
+const SearchIcon = () => {
+  const navigate = useNavigate();
+
+  const handleSearchField = () => {
+    navigate('/search');
+  };
+
   return (
-    <Wrap>
-      <IoMenuSharp />
+    <Wrap onClick={handleSearchField}>
+      <IoSearch />
     </Wrap>
   );
 };
@@ -12,7 +19,7 @@ const Menu = () => {
 const Wrap = styled.div`
   color: #222;
   background-color: #fff;
-  font-size: 30px;
+  font-size: 25px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -21,12 +28,14 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-left: 30px;
 
   @media only screen and (max-width: 418px) {
     width: 35px;
     height: 35px;
     font-size: 20px;
+    margin-left: 15px;
   }
 `;
 
-export default Menu;
+export default SearchIcon;

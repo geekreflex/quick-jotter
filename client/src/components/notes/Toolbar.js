@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import { IoEllipsisVertical } from 'react-icons/io5';
 
-const Toolbar = ({ visible }) => {
+const Toolbar = ({ visible, light }) => {
+  const handleMoreClick = (e) => {
+    e.stopPropagation();
+    console.log('more...');
+  };
+
   return (
     <Wrap style={{ visibility: visible ? 'visible' : 'hidden' }}>
-      <MoreIcon>
+      <MoreIcon light={light} onClick={handleMoreClick}>
         <i>
           <IoEllipsisVertical />
         </i>
@@ -30,7 +35,8 @@ const MoreIcon = styled.div`
     align-items: center;
 
     &:hover {
-      background-color: #eee;
+      background-color: ${(props) =>
+        props.light ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.2)'};
     }
   }
 `;

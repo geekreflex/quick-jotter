@@ -33,6 +33,12 @@ const Wrap = styled.div`
   cursor: pointer;
   box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
   z-index: 99999;
+
+  @media only screen and (max-width: 418px) {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
 `;
 
 export default AddNewNote;

@@ -8,7 +8,9 @@ const WelcomeBoard = () => {
       <Overlay />
       <Backdrop />
       <Inner>
-        <GoogleAuth />
+        <Main>
+          <GoogleAuth />
+        </Main>
       </Inner>
     </Wrap>
   );
@@ -23,7 +25,13 @@ const Wrap = styled.div`
 `;
 
 const Inner = styled.div`
-  position: fixed;
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+  z-index: 99;
+`;
+
+const Main = styled.div`
   background-color: #fafafa;
   z-index: 99;
   width: 500px;

@@ -4,29 +4,25 @@ import Header from '../components/header/Header';
 import AddNewNote from '../components/new/AddNewNote';
 import NewNoteModal from '../components/new/NewNoteModal';
 import NoteList from '../components/notes/NoteList';
-import SearchBar from '../components/search/SearchBar';
 import { getNotes } from '../features/notesSlice';
+import { Outlet } from 'react-router';
 
 const DashBoard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getNotes());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
       <Header />
-      <div
-        style={{
-          marginTop: '100px',
-        }}
-      >
-        <SearchBar />
-        <AddNewNote />
-      </div>
+      <AddNewNote />
       <NewNoteModal />
       <NoteList />
+      <div style={{ position: 'relative', zIndex: '999999' }}>
+        <Outlet />
+      </div>
     </div>
   );
 };

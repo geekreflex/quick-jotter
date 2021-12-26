@@ -2,8 +2,9 @@ const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/authModel');
 const generateToken = require('../utils/generateToken');
 const client = new OAuth2Client(process.env.CLIENT_ID);
+const asyncHandler = require('express-async-handler');
 
-const googleLogin = async (req, res) => {
+const googleLogin = asyncHandler(async (req, res) => {
   const { token } = req.body;
 
   const ticket = await client.verifyIdToken({
@@ -42,7 +43,7 @@ const googleLogin = async (req, res) => {
       });
     }
   }
-};
+});
 
 module.exports = {
   googleLogin,

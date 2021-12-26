@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const ColorPalette = ({ setColor, sltColor }) => {
   const colors = [
+    { color: 'default', label: 'Default' },
     { color: '#202124' },
     { color: '#5c2b29' },
     { color: '#614919' },
@@ -37,8 +38,9 @@ const ColorPalette = ({ setColor, sltColor }) => {
 };
 
 const Palette = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  width: auto;
+  white-space: nowrap;
+  overflow-y: auto;
 
   .active {
   }
@@ -49,7 +51,7 @@ const Color = styled.div`
   border-radius: 50%;
   margin-left: 5px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   color: #fff;

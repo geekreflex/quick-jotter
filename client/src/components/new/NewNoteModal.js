@@ -24,7 +24,6 @@ const NewNoteModal = () => {
       content,
       color,
     };
-    console.log(payload);
     dispatch(createNote(payload));
     dispatch(toggleNoteModal());
   };
@@ -69,9 +68,22 @@ const NewNoteModal = () => {
   }, [newNoteModal]);
 
   return (
-    <Wrap visible={newNoteModal}>
+    <Wrap
+      visible={newNoteModal}
+      className={
+        newNoteModal
+          ? 'animate__animated animate__fadeIn'
+          : 'animate__animated animate__fadeOut'
+      }
+    >
       <Overlay onClick={handleToggleAddModal} />
-      <Inner>
+      <Inner
+        className={
+          newNoteModal
+            ? 'animate__animated animate__zoomInUp'
+            : 'animate__animated animate__zoomOutUp'
+        }
+      >
         <form onSubmit={handleSubmitNote}>
           <Editable>
             <EWrap className="title">
@@ -114,16 +126,19 @@ const NewNoteModal = () => {
 };
 
 const Wrap = styled.div`
-  display: ${(props) => (props.visible ? 'flex' : 'none')};
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  display: flex;
   position: fixed;
   width: 100%;
   height: 100vh;
-  z-index: 9999;
+  z-index: 999999;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
   top: 0;
   left: 0;
+  transition: all 300ms;
+  transition-delay: 300ms;
 `;
 
 const Overlay = styled.div`
@@ -144,7 +159,7 @@ const Inner = styled.div`
 `;
 
 const NoteTool = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 const Editable = styled.div`

@@ -12,7 +12,6 @@ const initialState = {
 export const createNote = createAsyncThunk(
   'notes/createNote',
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const config = {
         headers: {
