@@ -17,24 +17,22 @@ const SearchIcon = () => {
 };
 
 const Wrap = styled.div`
-  color: #222;
-  background-color: #fff;
   font-size: 25px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
+  box-shadow: ${(props) => props.theme.shadow};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: 30px;
+  background-color: ${(props) => props.theme.secondary};
+  color: ${(props) => props.theme.textColor};
 
-  @media only screen and (max-width: 418px) {
+  @media only screen and (max-width: 768px) {
     width: 35px;
     height: 35px;
     font-size: 20px;
-    margin-left: 15px;
   }
 `;
 

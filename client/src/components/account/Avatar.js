@@ -10,7 +10,6 @@ const Avatar = () => {
 
   const handleAccountClick = () => {
     setVisible(!visible);
-    console.log(visible);
   };
 
   const hide = () => {

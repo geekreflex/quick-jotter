@@ -35,12 +35,13 @@ const Wrap = styled.div`
   position: fixed;
   top: 80px;
   right: 20px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.secondary};
   z-index: 99999999;
   padding: 10px 0;
   border-radius: 8px;
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   transition: all 500ms;
+  color: ${(props) => props.theme.textColor};
 
   /* @media only screen and (max-width: 768px) {
     bottom: 0;
@@ -66,10 +67,12 @@ const UserInfo = styled.div`
 `;
 
 const Name = styled.div`
-  font-weight: 600;
+  font-weight: 400;
   font-size: 18px;
 `;
-const Email = styled.div``;
+const Email = styled.div`
+  font-size: 14px;
+`;
 
 const Nav = styled.div`
   display: flex;
@@ -86,10 +89,10 @@ const Nav = styled.div`
     font-size: 14px;
     padding: 10px 20px;
     cursor: pointer;
-    color: #222;
+    color: ${(props) => props.theme.textColor};
 
     &:hover {
-      background-color: #eee;
+      background-color: ${(props) => props.theme.hover};
     }
   }
 `;

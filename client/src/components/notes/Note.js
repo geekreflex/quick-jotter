@@ -22,17 +22,13 @@ const Note = ({ note }) => {
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
       onClick={handleNoteClick}
-      style={{
-        color: note.color && note.color !== 'default' ? '#fff' : '',
-        backgroundColor:
-          note.color && note.color !== 'default' ? note.color : '#fff',
-      }}
+      color={note.color}
     >
       <NoteMain>
         <NoteTitle>{note.title}</NoteTitle>
         <NoteContent>{truncate(note.content)}</NoteContent>
       </NoteMain>
-      <Toolbar visible={visible} light={note.color === 'default'} />
+      <Toolbar visible={visible} color={note.color} />
     </Wrap>
   );
 };
@@ -42,19 +38,23 @@ const Wrap = styled.div`
   width: 50%;
   margin: 0 10px;
   vertical-align: top;
-  background: #fff;
-  border-radius: 5px;
+  border-radius: 8px;
   max-width: 250px;
   min-width: 250px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
   cursor: default;
-  border: 1px solid transparent;
+  border: 1px solid
+    ${(props) =>
+      props.color === '#fff' ? props.theme.borderColor : props.color};
+  background: ${(props) =>
+    props.color !== 'default' ? props.color : props.theme.default};
+  color: ${(props) =>
+    props.color === '#fff' ? props.theme.textColor : '#fff'};
 
   &:hover {
-    border: 1px solid #eee;
+    box-shadow: ${(props) => props.theme.shadow};
   }
 `;
 

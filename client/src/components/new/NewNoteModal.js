@@ -7,10 +7,16 @@ import ColorPalette from '../widgets/ColorPalette';
 
 const NewNoteModal = () => {
   const dispatch = useDispatch();
-  const { newNoteModal } = useSelector((state) => state.actions);
+  const { newNoteModal, theme } = useSelector((state) => state.actions);
+  const defaultColor = theme === 'light' ? '#fff' : '#202124';
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState(defaultColor);
+
+  useEffect(() => {
+    setColor(defaultColor);
+  }, [theme]);
 
   const titleLabelRef = useRef();
   const titleEditableRef = useRef();
@@ -32,6 +38,7 @@ const NewNoteModal = () => {
     dispatch(toggleNoteModal());
     setTitle('');
     setContent('');
+    setColor('');
     if (title || content) {
       titleEditableRef.current.innerText = '';
       contentEditableRef.current.innerText = '';
@@ -78,9 +85,10 @@ const NewNoteModal = () => {
     >
       <Overlay onClick={handleToggleAddModal} />
       <Inner
+        color={color}
         className={
           newNoteModal
-            ? 'animate__animated animate__zoomInUp'
+            ? 'animate__animated animate__zoomInDown'
             : 'animate__animated animate__zoomOutUp'
         }
       >
@@ -118,7 +126,12 @@ const NewNoteModal = () => {
           <NoteTool>
             <ColorPalette setColor={setColor} sltColor={color} />
           </NoteTool>
-          <button type="submit">Submit Note</button>
+          <NoteBtn color={color}>
+            <button type="button" onClick={handleToggleAddModal}>
+              Cancel
+            </button>
+            <button type="submit">Submit Note</button>
+          </NoteBtn>
         </form>
       </Inner>
     </Wrap>
@@ -131,7 +144,7 @@ const Wrap = styled.div`
   position: fixed;
   width: 100%;
   height: 100vh;
-  z-index: 999999;
+  z-index: 999;
   justify-content: center;
   align-items: center;
   padding: 0 20px;
@@ -150,16 +163,19 @@ const Overlay = styled.div`
 
 const Inner = styled.div`
   position: relative;
-  background-color: white;
+  background-color: ${(props) =>
+    props.color === 'default' ? props.theme.default : props.color};
   padding: 20px;
   box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
   width: 600px;
   max-width: 100%;
   border-radius: 8px;
+  color: ${(props) =>
+    props.color === '#fff' ? props.theme.textColor : '#fff'};
 `;
 
 const NoteTool = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const Editable = styled.div`
@@ -198,7 +214,28 @@ const ELabel = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  color: #555;
 `;
 
+const NoteBtn = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    margin-left: 30px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: ${(props) =>
+      props.color === '#fff' ? props.theme.textColor : '#fff'};
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 300ms;
+
+    &:hover {
+      background-color: ${(props) => props.theme.hover};
+      color: ${(props) => props.theme.textColor};
+    }
+  }
+`;
 export default NewNoteModal;

@@ -53,7 +53,7 @@ const Wrap = styled.div`
   margin-top: 100px;
 
   @media only screen and (max-width: 768px) {
-    margin-top: 40px;
+    margin-top: 60px;
   }
 `;
 

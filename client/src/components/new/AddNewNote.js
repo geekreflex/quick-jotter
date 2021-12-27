@@ -23,16 +23,16 @@ const Wrap = styled.div`
   right: 30px;
   width: 60px;
   height: 60px;
-  background-color: #fff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 35px;
-  color: #222;
   cursor: pointer;
-  box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
+  box-shadow: ${(props) => props.theme.shadow};
   z-index: 99999;
+  background-color: ${(props) => props.theme.secondary};
+  color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 418px) {
     width: 50px;

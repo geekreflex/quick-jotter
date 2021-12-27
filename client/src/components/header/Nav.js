@@ -1,0 +1,46 @@
+import { IoAlbumsOutline, IoTrashOutline } from 'react-icons/io5';
+import styled from 'styled-components';
+import ToggleTheme from '../widgets/ToggleTheme';
+
+const Nav = ({ visible }) => {
+  return (
+    <Wrap visible={visible}>
+      <NavIcon visible={visible} style={{ marginTop: visible ? '0' : '0' }}>
+        <IoAlbumsOutline />
+      </NavIcon>
+      <NavIcon visible={visible} style={{ marginTop: visible ? '60px' : '0' }}>
+        <IoTrashOutline />
+      </NavIcon>
+      <NavIcon visible={visible} style={{ marginTop: visible ? '120px' : '0' }}>
+        <ToggleTheme />
+      </NavIcon>
+    </Wrap>
+  );
+};
+
+const Wrap = styled.div`
+  position: absolute;
+  bottom: -50px;
+`;
+const NavIcon = styled.div`
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: ${(props) => (props.visible ? props.theme.shadow : '')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  transition: all 300ms;
+  background-color: ${(props) => props.theme.secondary};
+  color: ${(props) => props.theme.textColor};
+
+  @media only screen and (max-width: 768px) {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+`;
+export default Nav;

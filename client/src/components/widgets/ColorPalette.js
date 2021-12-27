@@ -1,10 +1,14 @@
 import { IoCheckmarkSharp } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const ColorPalette = ({ setColor, sltColor }) => {
+  const { theme } = useSelector((state) => state.actions);
+
+  const defaultColor = theme === 'light' ? '#fff' : '#202124';
+
   const colors = [
-    { color: 'default', label: 'Default' },
-    { color: '#202124' },
+    { color: defaultColor, label: 'Default' },
     { color: '#5c2b29' },
     { color: '#614919' },
     { color: '#5b2245' },
@@ -29,6 +33,8 @@ const ColorPalette = ({ setColor, sltColor }) => {
             backgroundColor: color.color,
             border: `2px solid ${color.color}`,
           }}
+          color={color.color}
+          className={sltColor === color.color ? 'active' : ''}
         >
           {sltColor === color.color && <IoCheckmarkSharp />}
         </Color>
@@ -38,11 +44,13 @@ const ColorPalette = ({ setColor, sltColor }) => {
 };
 
 const Palette = styled.div`
-  width: auto;
   white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
   overflow-y: auto;
 
   .active {
+    border-color: #bbb !important;
   }
 `;
 const Color = styled.div`
@@ -54,8 +62,8 @@ const Color = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   font-size: 20px;
+  color: ${(props) => (props.color === '#fff' ? '#222' : '#fff')};
 
   &:hover {
     border-color: #bbb !important;
