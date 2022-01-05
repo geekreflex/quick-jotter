@@ -10,6 +10,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
+
 const authRoute = require('./routes/authRoute');
 const noteRoute = require('./routes/noteRoute');
 
@@ -27,6 +29,9 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API is running...');
   });
 }
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 7000;
 

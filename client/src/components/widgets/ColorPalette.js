@@ -1,9 +1,13 @@
+import { useEffect, useRef } from 'react';
 import { IoCheckmarkSharp } from 'react-icons/io5';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { setSelectedColor } from '../../features/actionsSlice';
 
-const ColorPalette = ({ setColor, sltColor }) => {
+const ColorPalette = ({ sltColor, setColor }) => {
   const { theme } = useSelector((state) => state.actions);
+  const dispatch = useDispatch();
+  const colorRef = useRef();
 
   const defaultColor = theme === 'light' ? '#fff' : '#202124';
 
@@ -19,35 +23,61 @@ const ColorPalette = ({ setColor, sltColor }) => {
     { color: '#256141' },
   ];
 
-  const handleColorSelect = (color) => {
+  const handleColorClick = (color) => {
     setColor(color);
+    dispatch(setSelectedColor(color));
   };
+
+  useEffect(() => {
+    if (colorRef.current) {
+      colorRef.current.scrollIntoView();
+    }
+  }, [sltColor]);
 
   return (
     <Palette>
-      {colors.map((color) => (
-        <Color
-          onClick={() => handleColorSelect(color.color)}
-          key={color.color}
-          style={{
-            backgroundColor: color.color,
-            border: `2px solid ${color.color}`,
-          }}
-          color={color.color}
-          className={sltColor === color.color ? 'active' : ''}
-        >
-          {sltColor === color.color && <IoCheckmarkSharp />}
-        </Color>
-      ))}
+      {colors.map((color) => {
+        if (sltColor === color.color) {
+          return (
+            <Color
+              onClick={() => {
+                handleColorClick(color.color);
+              }}
+              key={color.color}
+              style={{
+                backgroundColor: color.color,
+                border: `2px solid ${color.color}`,
+              }}
+              color={color.color}
+              className="active"
+              ref={colorRef}
+            >
+              <IoCheckmarkSharp />
+            </Color>
+          );
+        } else {
+          return (
+            <Color
+              onClick={() => {
+                handleColorClick(color.color);
+              }}
+              key={color.color}
+              style={{
+                backgroundColor: color.color,
+                border: `2px solid ${color.color}`,
+              }}
+              color={color.color}
+            ></Color>
+          );
+        }
+      })}
     </Palette>
   );
 };
 
 const Palette = styled.div`
   white-space: nowrap;
-  display: flex;
-  flex-wrap: wrap;
-  overflow-y: auto;
+  overflow-x: auto;
 
   .active {
     border-color: #bbb !important;

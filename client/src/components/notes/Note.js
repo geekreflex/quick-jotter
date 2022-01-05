@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { setSelectedNote } from '../../features/notesSlice';
 import Toolbar from './Toolbar';
 
 const Note = ({ note }) => {
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const truncate = (note) => {
     if (note.length > 100) {
@@ -15,6 +18,7 @@ const Note = ({ note }) => {
 
   const handleNoteClick = () => {
     console.log('note clicked');
+    dispatch(setSelectedNote(note));
   };
 
   return (
@@ -28,7 +32,7 @@ const Note = ({ note }) => {
         <NoteTitle>{note.title}</NoteTitle>
         <NoteContent>{truncate(note.content)}</NoteContent>
       </NoteMain>
-      <Toolbar visible={visible} color={note.color} />
+      <Toolbar visible={visible} color={note.color} note={note} />
     </Wrap>
   );
 };
@@ -47,9 +51,11 @@ const Wrap = styled.div`
   cursor: default;
   border: 1px solid
     ${(props) =>
-      props.color === '#fff' ? props.theme.borderColor : props.color};
+      props.color === '#fff' || props.color === '#202124'
+        ? props.theme.borderColor
+        : props.color};
   background: ${(props) =>
-    props.color !== 'default' ? props.color : props.theme.default};
+    props.color === '#fff' ? props.theme.default : props.color};
   color: ${(props) =>
     props.color === '#fff' ? props.theme.textColor : '#fff'};
 

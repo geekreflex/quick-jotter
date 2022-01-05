@@ -3,6 +3,7 @@ import Welcome from './views/Welcome';
 import Dashboard from './views/Dashboard';
 import { ProtectedRoute, PublicRoute } from './helpers/authRoutes';
 import Search from './views/Search';
+import AddNote from './views/AddNote';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             }
           >
             <Route path="search" element={<Search />} />
+            <Route path="new" element={<AddNote />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

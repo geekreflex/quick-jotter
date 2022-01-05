@@ -1,13 +1,12 @@
-import { useDispatch } from 'react-redux';
 import { IoAddSharp } from 'react-icons/io5';
-import { toggleNoteModal } from '../../features/actionsSlice';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const AddNewNote = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddNewNote = () => {
-    dispatch(toggleNoteModal());
+    navigate('/new');
   };
 
   return (

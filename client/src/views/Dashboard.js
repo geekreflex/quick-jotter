@@ -6,6 +6,7 @@ import NewNoteModal from '../components/new/NewNoteModal';
 import NoteList from '../components/notes/NoteList';
 import { getNotes } from '../features/notesSlice';
 import { Outlet } from 'react-router';
+import NoteOption from '../components/option/NoteOption';
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,8 @@ const DashBoard = () => {
     <div>
       <Header />
       <AddNewNote />
-      <NewNoteModal />
       <NoteList />
+      <NoteOption />
       <div style={{ position: 'relative', zIndex: '999999' }}>
         <Outlet />
       </div>

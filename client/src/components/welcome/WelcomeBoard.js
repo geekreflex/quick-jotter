@@ -6,7 +6,7 @@ const WelcomeBoard = () => {
   return (
     <Wrap>
       <Overlay />
-      <Backdrop />
+      {/* <Backdrop /> */}
       <Inner>
         <Main>
           <GoogleAuth />
@@ -22,6 +22,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
 `;
 
 const Inner = styled.div`
@@ -32,7 +33,7 @@ const Inner = styled.div`
 `;
 
 const Main = styled.div`
-  background-color: #fafafa;
+  background-color: #eee;
   z-index: 99;
   width: 500px;
   max-width: 100%;

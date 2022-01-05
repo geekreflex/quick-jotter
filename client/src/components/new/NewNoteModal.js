@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toggleNoteModal } from '../../features/actionsSlice';
 import { createNote } from '../../features/notesSlice';
 import ColorPalette from '../widgets/ColorPalette';
+import { useNavigate } from 'react-router-dom';
 
 const NewNoteModal = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,9 @@ const NewNoteModal = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [color, setColor] = useState(defaultColor);
+  const [visible, setVisible] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setColor(defaultColor);
@@ -31,11 +34,15 @@ const NewNoteModal = () => {
       color,
     };
     dispatch(createNote(payload));
-    dispatch(toggleNoteModal());
+    navigate('/');
   };
 
   const handleToggleAddModal = () => {
-    dispatch(toggleNoteModal());
+    setVisible(false);
+    setTimeout(() => {
+      navigate('/');
+    }, 300);
+
     setTitle('');
     setContent('');
     setColor('');
@@ -76,9 +83,9 @@ const NewNoteModal = () => {
 
   return (
     <Wrap
-      visible={newNoteModal}
+      visible={visible}
       className={
-        newNoteModal
+        visible
           ? 'animate__animated animate__fadeIn'
           : 'animate__animated animate__fadeOut'
       }
@@ -87,9 +94,9 @@ const NewNoteModal = () => {
       <Inner
         color={color}
         className={
-          newNoteModal
+          visible
             ? 'animate__animated animate__zoomInDown'
-            : 'animate__animated animate__zoomOutUp'
+            : 'animate__animated animate__zoomOut'
         }
       >
         <form onSubmit={handleSubmitNote}>
@@ -124,7 +131,7 @@ const NewNoteModal = () => {
             </EWrap>
           </Editable>
           <NoteTool>
-            <ColorPalette setColor={setColor} sltColor={color} />
+            <ColorPalette sltColor={color} setColor={setColor} />
           </NoteTool>
           <NoteBtn color={color}>
             <button type="button" onClick={handleToggleAddModal}>
@@ -163,13 +170,13 @@ const Overlay = styled.div`
 
 const Inner = styled.div`
   position: relative;
-  background-color: ${(props) =>
-    props.color === 'default' ? props.theme.default : props.color};
+  background-color: ${(props) => props.color};
   padding: 20px;
   box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
   width: 600px;
   max-width: 100%;
   border-radius: 8px;
+  transition: all 300ms;
   color: ${(props) =>
     props.color === '#fff' ? props.theme.textColor : '#fff'};
 `;

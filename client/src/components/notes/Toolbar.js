@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { IoEllipsisVertical } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
+import { setSelectedNote } from '../../features/notesSlice';
+import { toggleNoteOptions } from '../../features/actionsSlice';
 
-const Toolbar = ({ visible, color }) => {
+const Toolbar = ({ visible, color, note }) => {
+  const dispatch = useDispatch();
+
   const handleMoreClick = (e) => {
     e.stopPropagation();
-    console.log('more...');
+    dispatch(setSelectedNote(note));
+    dispatch(toggleNoteOptions());
   };
 
   return (
@@ -36,9 +42,7 @@ const MoreIcon = styled.div`
 
     &:hover {
       background-color: ${(props) =>
-        props.color === 'default'
-          ? props.theme.hover
-          : 'rgba(255,255,255, .2)'};
+        props.color === '#fff' ? props.theme.hover : 'rgba(255,255,255, .2)'};
     }
   }
 `;

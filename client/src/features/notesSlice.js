@@ -5,6 +5,7 @@ import { token } from '../utils/token';
 
 const initialState = {
   notes: [],
+  note: {},
   status: 'idle',
   error: null,
 };
@@ -57,10 +58,51 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
   }
 });
 
+export const updateNoteColor = createAsyncThunk(
+  'notes/updateNoteColor',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(
+        `${BASE_URL}/api/notes/${payload.noteId}/color`,
+        payload,
+        config
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 export const notesSlice = createSlice({
   name: 'notes',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedNote(state, action) {
+      state.note = action.payload;
+    },
+    switchNoteColor(state, action) {
+      const { noteId, color } = action.payload;
+      state.note.color = color;
+      const existingNote = state.notes.find((note) => note._id === noteId);
+
+      if (existingNote) {
+        existingNote.color = color;
+      }
+    },
+  },
   extraReducers: {
     // create note
     [createNote.pending]: (state) => {
@@ -94,5 +136,5 @@ export const notesSlice = createSlice({
   },
 });
 
-// export const {} = notesSlice.actions;
+export const { setSelectedNote, switchNoteColor } = notesSlice.actions;
 export default notesSlice.reducer;
