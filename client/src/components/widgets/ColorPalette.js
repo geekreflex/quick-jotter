@@ -1,18 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { IoCheckmarkSharp } from 'react-icons/io5';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { setSelectedColor } from '../../features/actionsSlice';
 
 const ColorPalette = ({ sltColor, setColor }) => {
-  const { theme } = useSelector((state) => state.actions);
   const dispatch = useDispatch();
   const colorRef = useRef();
 
-  const defaultColor = theme === 'light' ? '#fff' : '#202124';
-
   const colors = [
-    { color: defaultColor, label: 'Default' },
+    { color: '#202124' },
     { color: '#5c2b29' },
     { color: '#614919' },
     { color: '#5b2245' },
@@ -34,6 +31,14 @@ const ColorPalette = ({ sltColor, setColor }) => {
     }
   }, [sltColor]);
 
+  const bdColor = (color) => {
+    if (color === '#202124') {
+      return '2px solid #999';
+    } else {
+      return `2px solid ${color}`;
+    }
+  };
+
   return (
     <Palette>
       {colors.map((color) => {
@@ -46,13 +51,15 @@ const ColorPalette = ({ sltColor, setColor }) => {
               key={color.color}
               style={{
                 backgroundColor: color.color,
-                border: `2px solid ${color.color}`,
+                border: bdColor(color.color),
               }}
               color={color.color}
               className="active"
               ref={colorRef}
             >
-              <IoCheckmarkSharp />
+              <Icon>
+                <IoCheckmarkSharp />
+              </Icon>
             </Color>
           );
         } else {
@@ -64,7 +71,7 @@ const ColorPalette = ({ sltColor, setColor }) => {
               key={color.color}
               style={{
                 backgroundColor: color.color,
-                border: `2px solid ${color.color}`,
+                border: bdColor(color.color),
               }}
               color={color.color}
             ></Color>
@@ -76,8 +83,9 @@ const ColorPalette = ({ sltColor, setColor }) => {
 };
 
 const Palette = styled.div`
-  white-space: nowrap;
   overflow-x: auto;
+  display: flex;
+  width: 100%;
 
   .active {
     border-color: #bbb !important;
@@ -89,15 +97,22 @@ const Color = styled.div`
   border-radius: 50%;
   margin-left: 5px;
   cursor: pointer;
-  display: inline-flex;
+  flex: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  color: ${(props) => (props.color === '#fff' ? '#222' : '#fff')};
+  color: ${(props) => (props.color === '#ffffff' ? '#222222' : '#ffffff')};
 
   &:hover {
     border-color: #bbb !important;
   }
+`;
+
+const Icon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default ColorPalette;

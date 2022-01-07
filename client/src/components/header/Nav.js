@@ -11,7 +11,13 @@ const Nav = ({ visible }) => {
       <NavIcon visible={visible} style={{ marginTop: visible ? '60px' : '0' }}>
         <IoTrashOutline />
       </NavIcon>
-      <NavIcon visible={visible} style={{ marginTop: visible ? '120px' : '0' }}>
+      <NavIcon
+        visible={visible}
+        style={{
+          marginTop: visible ? '120px' : '0',
+          boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+        }}
+      >
         <ToggleTheme />
       </NavIcon>
     </Wrap>

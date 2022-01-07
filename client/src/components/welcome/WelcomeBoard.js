@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import GoogleAuth from '../google/GoogleAuth';
 import Backdrop from './Backdrop';
+import QuickJotter from './QuickJotter';
 
 const WelcomeBoard = () => {
   return (
@@ -8,6 +9,7 @@ const WelcomeBoard = () => {
       <Overlay />
       {/* <Backdrop /> */}
       <Inner>
+        <QuickJotter />
         <Main>
           <GoogleAuth />
         </Main>
@@ -22,7 +24,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.primary};
 `;
 
 const Inner = styled.div`
@@ -30,6 +32,10 @@ const Inner = styled.div`
   width: 100%;
   padding: 0 20px;
   z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Main = styled.div`

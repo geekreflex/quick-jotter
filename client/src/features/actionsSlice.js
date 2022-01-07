@@ -20,6 +20,9 @@ export const actionsSlice = createSlice({
     setSelectedColor(state, action) {
       state.sltColor = action.payload;
     },
+    clearSelectedColor(state) {
+      state.sltColor = null;
+    },
     setThemeMode(state) {
       const key = 'quick-jotter-theme';
       const mode = window.localStorage.getItem(key)
@@ -40,5 +43,6 @@ export const {
   toggleNoteOptions,
   setThemeMode,
   setSelectedColor,
+  clearSelectedColor,
 } = actionsSlice.actions;
 export default actionsSlice.reducer;

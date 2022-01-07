@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { setSelectedNote } from '../../features/notesSlice';
 import Toolbar from './Toolbar';
@@ -7,6 +8,7 @@ import Toolbar from './Toolbar';
 const Note = ({ note }) => {
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const truncate = (note) => {
     if (note.length > 100) {
@@ -18,6 +20,7 @@ const Note = ({ note }) => {
 
   const handleNoteClick = () => {
     console.log('note clicked');
+    navigate(`/note/${note._id}`);
     dispatch(setSelectedNote(note));
   };
 
@@ -54,10 +57,8 @@ const Wrap = styled.div`
       props.color === '#fff' || props.color === '#202124'
         ? props.theme.borderColor
         : props.color};
-  background: ${(props) =>
-    props.color === '#fff' ? props.theme.default : props.color};
-  color: ${(props) =>
-    props.color === '#fff' ? props.theme.textColor : '#fff'};
+  background: ${(props) => props.color};
+  color: ${(props) => (props.color === '#fff' ? '#555' : '#fff')};
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadow};

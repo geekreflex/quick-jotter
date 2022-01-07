@@ -86,12 +86,43 @@ export const updateNoteColor = createAsyncThunk(
   }
 );
 
+export const updateNoteAsync = createAsyncThunk(
+  'notes/updateNote',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(
+        `${BASE_URL}/api/notes/${payload.noteId}`,
+        payload.data,
+        config
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 export const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
     setSelectedNote(state, action) {
       state.note = action.payload;
+    },
+    clearSelectedNote(state) {
+      state.note = {};
     },
     switchNoteColor(state, action) {
       const { noteId, color } = action.payload;
@@ -100,6 +131,14 @@ export const notesSlice = createSlice({
 
       if (existingNote) {
         existingNote.color = color;
+      }
+    },
+    updateNote(state, action) {
+      const { data, noteId } = action.payload;
+      const existingNote = state.notes.find((note) => note._id === noteId);
+      if (existingNote) {
+        existingNote.title = data.title;
+        existingNote.content = data.content;
       }
     },
   },
@@ -136,5 +175,10 @@ export const notesSlice = createSlice({
   },
 });
 
-export const { setSelectedNote, switchNoteColor } = notesSlice.actions;
+export const {
+  setSelectedNote,
+  switchNoteColor,
+  clearSelectedNote,
+  updateNote,
+} = notesSlice.actions;
 export default notesSlice.reducer;

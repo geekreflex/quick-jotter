@@ -33,8 +33,6 @@ const updateNoteColor = asyncHandler(async (req, res) => {
 
   const note = await Note.findById(req.params.id);
 
-  console.log(note);
-
   if (note) {
     note.color = color;
     await note.save();
@@ -45,8 +43,27 @@ const updateNoteColor = asyncHandler(async (req, res) => {
   }
 });
 
+const updateNote = asyncHandler(async (req, res) => {
+  const { title, content, color } = req.body;
+
+  const note = await Note.findById(req.params.id);
+
+  if (note) {
+    note.ttile = title;
+    note.content = content;
+    note.color = color;
+
+    const updatedNote = await note.save();
+    res.json(updatedNote);
+  } else {
+    res.status(404);
+    throw new Error('Note not found');
+  }
+});
+
 module.exports = {
   createNote,
   getNotes,
   updateNoteColor,
+  updateNote,
 };

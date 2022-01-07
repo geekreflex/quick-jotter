@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toggleNoteOptions } from '../../features/actionsSlice';
+import {
+  clearSelectedColor,
+  toggleNoteOptions,
+} from '../../features/actionsSlice';
 import { switchNoteColor, updateNoteColor } from '../../features/notesSlice';
 import CloseBtn from '../buttons/CloseBtn';
 import ColorPalette from '../widgets/ColorPalette';
@@ -9,7 +12,7 @@ import NoteMenu from './NoteMenu';
 
 const NoteOption = () => {
   const { noteOptions, sltColor } = useSelector((state) => state.actions);
-  const [color, setColor] = useState(sltColor);
+  const [color, setColor] = useState('');
   const { note } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
 
@@ -27,17 +30,31 @@ const NoteOption = () => {
     if (sltColor) {
       handleColor();
     }
-  }, [sltColor]);
+  }, [sltColor, handleColor]);
 
   const handleCloseOptions = () => {
     dispatch(toggleNoteOptions());
+    dispatch(clearSelectedColor());
   };
 
   return (
-    <Wrap visible={noteOptions}>
+    <Wrap
+      visible={noteOptions}
+      className={
+        noteOptions
+          ? 'animate__animated animate__fadeIn'
+          : 'animate__animated animate__fadeOut'
+      }
+    >
       <Overlay onClick={handleCloseOptions} />
       <Inner>
-        <Main>
+        <Main
+          className={
+            noteOptions
+              ? 'animate__animated animate__fadeInUp'
+              : 'animate__animated animate__fadeOut'
+          }
+        >
           <CloseBtn handleClick={handleCloseOptions} />
           <NoteMenu />
           <NoteColor>
@@ -50,12 +67,15 @@ const NoteOption = () => {
 };
 
 const Wrap = styled.div`
-  display: ${(props) => (props.visible ? 'block' : 'none')};
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   z-index: 9999999;
+  padding: 0 20px;
+  justify-content: center;
+  align-items: flex-start;
 `;
 const Overlay = styled.div`
   position: absolute;
@@ -64,12 +84,9 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 const Inner = styled.div`
-  display: flex;
-  justify-content: center;
   margin-top: 10px;
   color: ${(props) => props.theme.textColor};
   position: relative;
-  padding: 0 20px;
 `;
 const Main = styled.div`
   min-width: 200px;
@@ -80,6 +97,14 @@ const Main = styled.div`
   padding: 20px 0;
   border-radius: 8px;
   position: relative;
+
+  @media only screen and (max-width: 520px) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+  }
 `;
 
 const NoteColor = styled.div`
