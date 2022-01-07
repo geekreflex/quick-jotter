@@ -1,5 +1,5 @@
 require('dotenv').config();
-const connectDB = require('./config/db');
+const connectDB = require('./server/config/db');
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -10,13 +10,18 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
+const {
+  notFound,
+  errorHandler,
+} = require('./server/middlewares/errorMiddleware');
 
-const authRoute = require('./routes/authRoute');
-const noteRoute = require('./routes/noteRoute');
+const authRoute = require('./server/routes/authRoute');
+const noteRoute = require('./server/routes/noteRoute');
 
 app.use('/api/auth', authRoute);
 app.use('/api/notes', noteRoute);
+
+console.log(path.join(__dirname, '/client/build'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));
