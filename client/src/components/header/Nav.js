@@ -44,9 +44,9 @@ const NavIcon = styled.div`
   color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 768px) {
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
   }
 `;
 export default Nav;

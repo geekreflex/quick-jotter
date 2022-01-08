@@ -86,13 +86,13 @@ const Inner = styled.div`
   overflow: auto;
   display: flex;
   justify-content: center;
-  padding: 0 20px;
 `;
 
 const Main = styled.div`
-  padding: 10px;
   width: 900px;
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default Search;

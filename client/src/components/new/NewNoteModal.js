@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { createNote } from '../../features/notesSlice';
 import ColorPalette from '../widgets/ColorPalette';
 import { useNavigate } from 'react-router-dom';
+import ArrowBack from '../notes/ArrowBack';
 
 const NewNoteModal = () => {
   const dispatch = useDispatch();
@@ -99,6 +100,7 @@ const NewNoteModal = () => {
             : 'animate__animated animate__zoomOut'
         }
       >
+        <ArrowBack close={handleToggleAddModal} />
         <form onSubmit={handleSubmitNote}>
           <Editable>
             <EWrap className="title">
@@ -132,13 +134,13 @@ const NewNoteModal = () => {
           </Editable>
           <NoteTool>
             <ColorPalette sltColor={color} setColor={setColor} />
+            <NoteBtn color={color}>
+              <button type="button" onClick={handleToggleAddModal}>
+                Cancel
+              </button>
+              <button type="submit">Submit Note</button>
+            </NoteBtn>
           </NoteTool>
-          <NoteBtn color={color}>
-            <button type="button" onClick={handleToggleAddModal}>
-              Cancel
-            </button>
-            <button type="submit">Submit Note</button>
-          </NoteBtn>
         </form>
       </Inner>
     </Wrap>
@@ -159,6 +161,10 @@ const Wrap = styled.div`
   left: 0;
   transition: all 300ms;
   transition-delay: 300ms;
+
+  @media only screen and (max-width: 520px) {
+    padding: 0;
+  }
 `;
 
 const Overlay = styled.div`
@@ -171,26 +177,55 @@ const Overlay = styled.div`
 const Inner = styled.div`
   position: relative;
   background-color: ${(props) => props.color};
-  padding: 20px;
+  padding: 20px 0;
   box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
   width: 600px;
   max-width: 100%;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   transition: all 300ms;
   color: ${(props) =>
     props.color === '#fff' ? props.theme.textColor : '#fff'};
+
+  form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  @media only screen and (max-width: 520px) {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    padding: 0;
+    padding-top: 10px;
+  }
 `;
 
 const NoteTool = styled.div`
   margin-bottom: 30px;
+  padding: 20px 20px;
+  padding-bottom: 0;
 
   @media only screen and (max-width: 520px) {
-    margin-bottom: 10px;
+    box-shadow: 0 -3px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+    padding: 20px 0;
   }
 `;
 
 const Editable = styled.div`
   margin-bottom: 20px;
+  padding: 0 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (max-width: 520px) {
+    margin-bottom: 0;
+  }
+
   .hide {
     display: none;
   }
@@ -201,6 +236,8 @@ const Editable = styled.div`
 
   .content {
     font-size: 14px;
+    flex: 1;
+    overflow-y: auto;
   }
 `;
 const EWrap = styled.div`
@@ -216,10 +253,13 @@ const ETitle = styled.div`
 const EContent = styled.div`
   min-height: 40px;
   max-height: 400px;
-  overflow: auto;
   border: none;
   outline: none;
   position: relative;
+
+  @media only sreen and (min-width: 520px) {
+    max-height: 400px;
+  }
 `;
 const ELabel = styled.div`
   position: absolute;

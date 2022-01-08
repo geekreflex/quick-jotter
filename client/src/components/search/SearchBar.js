@@ -51,6 +51,7 @@ const Wrap = styled.div`
   width: 100%;
   margin-bottom: 30px;
   margin-top: 100px;
+  padding: 0 20px;
 
   @media only screen and (max-width: 768px) {
     margin-top: 60px;
@@ -74,6 +75,7 @@ const Search = styled.div`
     border: none;
     outline: none;
     font-size: 16px;
+    width: 100%;
     flex: 1;
   }
 
@@ -90,6 +92,18 @@ const Search = styled.div`
 
     &:hover {
       background-color: #eee;
+    }
+  }
+
+  @media only screen and (max-width: 520px) {
+    padding: 0 10px;
+    input {
+      height: 45px;
+      font-size: 14px;
+    }
+
+    i {
+      font-size: 16px;
     }
   }
 `;

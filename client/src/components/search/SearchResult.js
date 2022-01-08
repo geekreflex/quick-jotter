@@ -17,10 +17,10 @@ const SearchResult = ({ search }) => {
 };
 
 const Wrap = styled.div`
-  margin-top: 100px;
   width: 100%;
-  margin-bottom: 50px;
   display: inline-block;
+  overflow-y: auto;
+  flex: 1;
   .grid-section {
     margin: 0 auto;
   }

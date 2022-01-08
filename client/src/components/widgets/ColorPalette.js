@@ -101,6 +101,7 @@ const Color = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
   font-size: 20px;
   color: ${(props) => (props.color === '#ffffff' ? '#222222' : '#ffffff')};
 

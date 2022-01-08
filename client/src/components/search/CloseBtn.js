@@ -10,8 +10,7 @@ const CloseBtn = ({ handleClick }) => {
 };
 
 const Wrap = styled.div`
-  color: #222;
-  background-color: #fff;
+  color: #fff;
   font-size: 20px;
   width: 35px;
   height: 35px;

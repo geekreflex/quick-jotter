@@ -79,7 +79,8 @@ const NoteContent = styled.p`
   width: 100%;
   white-space: pre-wrap;
   overflow: hidden;
-  /* max-height: 300px; */
+  max-height: 350px;
+  text-overflow: ellipsis;
   word-wrap: break-word;
   font-size: 14px;
 `;
