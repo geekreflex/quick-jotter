@@ -4,7 +4,7 @@ const initialState = {
   newNoteModal: false,
   noteOptions: false,
   sltColor: null,
-  theme: 'light',
+  theme: 'dark',
 };
 
 export const actionsSlice = createSlice({
@@ -32,7 +32,7 @@ export const actionsSlice = createSlice({
       if (mode) {
         state.theme = mode;
       } else {
-        state.theme = 'light';
+        state.theme = 'dark';
       }
     },
   },
