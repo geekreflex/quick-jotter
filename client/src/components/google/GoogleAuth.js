@@ -7,6 +7,11 @@ import { GoogleLogo500 } from '../../utils/loadImg';
 const GoogleAuth = () => {
   const dispatch = useDispatch();
 
+  const googleClientId =
+    process.env.NODE_ENV === 'development'
+      ? process.env.REACT_APP_GOOGLE_CLIENT_ID_LOCAL
+      : process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
   const handleGoogleLogin = async (response) => {
     const payload = { token: response.tokenId };
     dispatch(loginWithGoogle(payload));
@@ -15,7 +20,7 @@ const GoogleAuth = () => {
   return (
     <div>
       <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+        clientId={googleClientId}
         render={(renderProps) => (
           <GoogleAuthBtn
             onClick={renderProps.onClick}

@@ -1,7 +1,14 @@
+require('dotenv').config();
 const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/authModel');
 const generateToken = require('../utils/generateToken');
-const client = new OAuth2Client(process.env.CLIENT_ID);
+
+const clientId =
+  process.env.NODE_ENV === 'development'
+    ? process.env.CLIENT_ID_LOCAL
+    : process.env.CLIENT_ID;
+
+const client = new OAuth2Client(clientId);
 const asyncHandler = require('express-async-handler');
 
 const googleLogin = asyncHandler(async (req, res) => {
@@ -9,7 +16,7 @@ const googleLogin = asyncHandler(async (req, res) => {
 
   const ticket = await client.verifyIdToken({
     idToken: token,
-    audience: process.env.CLIENT_ID,
+    audience: clientId,
   });
 
   const { name, email, picture } = ticket.getPayload();
