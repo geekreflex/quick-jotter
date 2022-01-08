@@ -40,7 +40,7 @@ const NavIcon = styled.div`
   cursor: pointer;
   position: absolute;
   transition: all 300ms;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.iconBg};
   color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 768px) {

@@ -183,6 +183,10 @@ const Inner = styled.div`
 
 const NoteTool = styled.div`
   margin-bottom: 30px;
+
+  @media only screen and (max-width: 520px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Editable = styled.div`

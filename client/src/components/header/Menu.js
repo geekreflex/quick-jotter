@@ -40,7 +40,7 @@ const Wrap = styled.div`
   align-items: center;
   cursor: pointer;
   margin-right: 30px;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.iconBg};
   color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 768px) {

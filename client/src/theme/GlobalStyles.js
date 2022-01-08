@@ -24,10 +24,18 @@ code {
 }
 
 ::-webkit-scrollbar {
-  height: 16px;
+  height: 12px;
   overflow: visible;
-  width: 16px;
+  width: 12px;
 }
+
+@media only screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+}
+
 
 ::-webkit-scrollbar-button {
   width: 0;

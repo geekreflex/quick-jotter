@@ -26,7 +26,7 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.iconBg};
   color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 768px) {

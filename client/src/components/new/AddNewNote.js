@@ -30,7 +30,7 @@ const Wrap = styled.div`
   cursor: pointer;
   box-shadow: ${(props) => props.theme.shadow};
   z-index: 99999;
-  background-color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.iconBg};
   color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 418px) {
