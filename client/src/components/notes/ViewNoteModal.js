@@ -123,12 +123,11 @@ const NoteInfo = styled.div`
   display: flex;
   flex-direction: column;
 
-  color: ${(props) =>
-    props.color === '#fff' ? props.theme.textColor : '#fff'};
+  color: ${(props) => props.theme.textColor};
 
   @media only screen and (max-width: 520px) {
     margin-top: 60px;
-    max-height: calc(100vh - 140px);
+    height: calc(100vh - 140px);
   }
 `;
 

@@ -14,17 +14,17 @@ const ArrowBack = ({ close, color }) => {
 };
 
 const Wrap = styled.div`
-  display: flex;
+  display: none;
   padding: 10px 20px;
   color: ${(props) => props.theme.color};
-
-  @media only screen and (min-width: 520px) {
-    display: none;
-  }
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   @media only screen and (max-width: 520px) {
+    display: flex;
+    align-items: center;
     position: fixed;
     top: 0;
+    width: 100%;
     height: 60px;
   }
 `;
