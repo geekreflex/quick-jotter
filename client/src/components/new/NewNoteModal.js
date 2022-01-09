@@ -185,8 +185,7 @@ const Inner = styled.div`
   display: flex;
   flex-direction: column;
   transition: all 300ms;
-  color: ${(props) =>
-    props.color === '#fff' ? props.theme.textColor : '#fff'};
+  color: ${(props) => props.theme.textColor2};
 
   form {
     display: flex;
@@ -222,7 +221,6 @@ const NoteTool = styled.div`
 
 const Editable = styled.div`
   margin-bottom: 20px;
-  padding: 0 20px;
   display: flex;
   flex-direction: column;
   height: calc(100% - 100px);
@@ -236,7 +234,7 @@ const Editable = styled.div`
   }
 
   .title {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .content {
@@ -246,8 +244,8 @@ const Editable = styled.div`
   }
 `;
 const EWrap = styled.div`
-  position: relative;
   width: 100%;
+  padding: 0 20px;
 `;
 const ETitle = styled.div`
   height: 40px;

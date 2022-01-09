@@ -8,6 +8,7 @@ export const lightTheme = {
   hover: '#eee',
   borderColor: 'rgb(224,224,224)',
   iconBg: '#eee',
+  textColor2: '#777',
 };
 
 export const darkTheme = {
@@ -20,4 +21,5 @@ export const darkTheme = {
   shadow2: '0px 8px 20px rgb(0 0 0 / 6%)',
   hover: 'rgba(255,255,255, .2)',
   borderColor: '#5f6368',
+  textColor2: '#eee',
 };

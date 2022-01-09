@@ -58,7 +58,7 @@ const Wrap = styled.div`
         ? props.theme.borderColor
         : props.color};
   background: ${(props) => props.color};
-  color: ${(props) => (props.color === '#fff' ? '#555' : '#fff')};
+  color: ${(props) => props.theme.textColor};
 
   &:hover {
     box-shadow: ${(props) => props.theme.shadow};

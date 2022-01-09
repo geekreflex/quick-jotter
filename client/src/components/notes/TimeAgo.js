@@ -27,6 +27,10 @@ const Wrap = styled.div`
     margin-right: 10px;
     font-weight: 900;
   }
+
+  @media only screen and (max-width: 520px) {
+    font-size: 11px;
+  }
 `;
 
 export default TimeAgo;

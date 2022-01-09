@@ -17,19 +17,24 @@ const DashBoard = () => {
     dispatch(getNotes());
   }, [dispatch]);
 
-  if (status === 'loading') {
-    return <Loading />;
-  }
+  const renderWhat = () => {
+    if (status === 'loading') {
+      return <Loading />;
+    }
+
+    if (notes && notes.length) {
+      return <NoteList />;
+    } else {
+      <Empty msg="You've don't have any note." type="note" />;
+      return;
+    }
+  };
 
   return (
     <div>
       <Header />
       <AddNewNote />
-      {notes.length ? (
-        <NoteList />
-      ) : (
-        <Empty msg="You've don't have any note." type="note" />
-      )}
+      {renderWhat()}
       <NoteOption />
       <div style={{ position: 'relative', zIndex: '999999' }}>
         <Outlet />

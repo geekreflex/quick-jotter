@@ -122,13 +122,8 @@ const Wrap = styled.div`
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   flex: 1;
-  border: 1px solid red;
-
-  @media only screen and (max-width: 520px) {
-    max-height: calc();
-  }
+  overflow: hidden;
 `;
 const NoteInfo = styled.div`
   padding: 20px;
@@ -136,6 +131,7 @@ const NoteInfo = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+
   color: ${(props) =>
     props.color === '#fff' ? props.theme.textColor : '#fff'};
 

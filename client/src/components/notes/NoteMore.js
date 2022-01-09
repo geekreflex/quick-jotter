@@ -15,10 +15,11 @@ const NoteMore = ({ color, close, note }) => {
 
 const Wrap = styled.div`
   padding: 10px 20px;
+  box-shadow: 0 -3px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
 
   @media only screen and (max-width: 520px) {
     height: 80px;
-    width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
