@@ -41,7 +41,7 @@ const Wrap = styled.div`
   cursor: pointer;
   margin-right: 30px;
   background-color: ${(props) => props.theme.iconBg};
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.textColor2};
 
   @media only screen and (max-width: 768px) {
     width: 40px;

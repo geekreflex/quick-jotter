@@ -41,7 +41,7 @@ export const NavIcon = styled.div`
   position: absolute;
   transition: all 300ms;
   background-color: ${(props) => props.theme.iconBg};
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.textColor2};
 
   @media only screen and (max-width: 768px) {
     width: 40px;
