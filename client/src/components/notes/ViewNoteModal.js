@@ -122,8 +122,9 @@ const Wrap = styled.div`
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  /* max-height: calc(100% - 200px); */
   overflow-y: auto;
+  flex: 1;
+  border: 1px solid red;
 
   @media only screen and (max-width: 520px) {
     max-height: calc();
