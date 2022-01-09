@@ -111,6 +111,9 @@ const Wrap = styled.div`
   flex-direction: column;
 
   @media only screen and (max-width: 520px) {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
     max-height: 100vh;
     border-radius: 0;
