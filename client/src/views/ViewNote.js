@@ -59,10 +59,17 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   padding: 0 20px;
+  border: 1px solid red;
 
   @media only screen and (max-width: 520px) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 0;
     height: 100vh;
+    border: 1px solid red;
   }
 `;
 const Main = styled.div`
