@@ -39,6 +39,8 @@ const Wrap = styled.div`
   height: 100%;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 99999;
   justify-content: center;
   align-items: center;
@@ -69,12 +71,21 @@ const Inner = styled.div`
     right: 0;
     padding: 0;
     height: 100vh;
-    border: 1px solid red;
   }
 `;
 const Main = styled.div`
   color: white;
   width: 100%;
+
+  @media only screen and (max-width: 520px) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    height: 100vh;
+  }
 `;
 
 export default ViewNote;
