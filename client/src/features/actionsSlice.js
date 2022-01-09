@@ -17,6 +17,9 @@ export const actionsSlice = createSlice({
     toggleNoteOptions(state) {
       state.noteOptions = !state.noteOptions;
     },
+    closeNoteOptions(state) {
+      state.noteOptions = false;
+    },
     setSelectedColor(state, action) {
       state.sltColor = action.payload;
     },
@@ -41,6 +44,7 @@ export const actionsSlice = createSlice({
 export const {
   toggleNoteModal,
   toggleNoteOptions,
+  closeNoteOptions,
   setThemeMode,
   setSelectedColor,
   clearSelectedColor,

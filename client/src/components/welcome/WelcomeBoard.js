@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import GoogleAuth from '../google/GoogleAuth';
+import ToggleTheme from '../widgets/ToggleTheme';
 import Backdrop from './Backdrop';
 import QuickJotter from './QuickJotter';
 
 const WelcomeBoard = () => {
   return (
     <Wrap>
+      <Mode>
+        <ToggleTheme />
+      </Mode>
       <Overlay />
       {/* <Backdrop /> */}
       <Inner>
@@ -54,6 +58,30 @@ const Overlay = styled.div`
   height: 100%;
   position: absolute;
   z-index: 1;
+`;
+
+const Mode = styled.div`
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: ${(props) => (props.visible ? props.theme.shadow : '')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  transition: all 300ms;
+  background-color: ${(props) => props.theme.iconBg};
+  color: ${(props) => props.theme.textColor};
+  top: 20px;
+  right: 20;
+
+  @media only screen and (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
+  }
 `;
 
 export default WelcomeBoard;

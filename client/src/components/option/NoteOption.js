@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   clearSelectedColor,
   toggleNoteOptions,
+  closeNoteOptions,
+  setSelectedColor,
 } from '../../features/actionsSlice';
 import { switchNoteColor, updateNoteColor } from '../../features/notesSlice';
 import CloseBtn from '../buttons/CloseBtn';
@@ -12,9 +15,10 @@ import NoteMenu from './NoteMenu';
 
 const NoteOption = () => {
   const { noteOptions, sltColor } = useSelector((state) => state.actions);
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState(sltColor);
   const { note } = useSelector((state) => state.notes);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleColor = () => {
     const payload = {
@@ -27,15 +31,23 @@ const NoteOption = () => {
   };
 
   useEffect(() => {
-    if (sltColor) {
+    if (sltColor && note) {
       handleColor();
     }
-  }, [sltColor, handleColor]);
+  }, [sltColor, note, handleColor]);
 
   const handleCloseOptions = () => {
     dispatch(toggleNoteOptions());
     dispatch(clearSelectedColor());
   };
+
+  useEffect(() => {
+    dispatch(closeNoteOptions());
+  }, [location]);
+
+  useEffect(() => {
+    dispatch(setSelectedColor(color));
+  }, [color]);
 
   return (
     <Wrap
@@ -58,7 +70,7 @@ const NoteOption = () => {
           <CloseBtn handleClick={handleCloseOptions} />
           <NoteMenu />
           <NoteColor>
-            <ColorPalette sltColor={note.color} setColor={setColor} />
+            <ColorPalette sltColor={note?.color} setColor={setColor} />
           </NoteColor>
         </Main>
       </Inner>
@@ -95,6 +107,7 @@ const Main = styled.div`
   background-color: ${(props) => props.theme.secondary};
   box-shadow: ${(props) => props.theme.shadow};
   padding: 20px 0;
+  padding-top: 50px;
   border-radius: 8px;
   position: relative;
 
@@ -104,6 +117,8 @@ const Main = styled.div`
     width: 100%;
     left: 0;
     border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 `;
 

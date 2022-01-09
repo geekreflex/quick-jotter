@@ -9,7 +9,7 @@ import ArrowBack from '../notes/ArrowBack';
 const NewNoteModal = () => {
   const dispatch = useDispatch();
   const { newNoteModal, theme } = useSelector((state) => state.actions);
-  const defaultColor = theme === 'light' ? '#fff' : '#202124';
+  const defaultColor = '#202124';
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -204,23 +204,28 @@ const Inner = styled.div`
 `;
 
 const NoteTool = styled.div`
+  width: 100%;
   margin-bottom: 30px;
   padding: 20px 20px;
   padding-bottom: 0;
 
   @media only screen and (max-width: 520px) {
+    height: 100px;
     box-shadow: 0 -3px 16px rgba(0, 0, 0, 0.1);
     margin-bottom: 0;
-    padding: 20px 0;
+    padding: 20px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
   }
 `;
 
 const Editable = styled.div`
   margin-bottom: 20px;
   padding: 0 20px;
-  flex: 1;
   display: flex;
   flex-direction: column;
+  height: calc(100% - 100px);
 
   @media only screen and (max-width: 520px) {
     margin-bottom: 0;

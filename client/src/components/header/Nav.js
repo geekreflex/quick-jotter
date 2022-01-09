@@ -28,7 +28,7 @@ const Wrap = styled.div`
   position: absolute;
   bottom: -50px;
 `;
-const NavIcon = styled.div`
+export const NavIcon = styled.div`
   font-size: 30px;
   width: 50px;
   height: 50px;

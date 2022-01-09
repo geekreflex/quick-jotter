@@ -4,7 +4,7 @@ import { MoreIcon } from './Toolbar';
 
 const NoteMore = ({ color, close, note }) => {
   return (
-    <Wrap>
+    <Wrap color={color}>
       <MoreIcon color={color} note={note} />
       <CloseNote color={color}>
         <button onClick={close}>Close</button>
@@ -15,6 +15,14 @@ const NoteMore = ({ color, close, note }) => {
 
 const Wrap = styled.div`
   padding: 10px 20px;
+
+  @media only screen and (max-width: 520px) {
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
 `;
 
 const CloseNote = styled.div`

@@ -1,11 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { IoCheckmarkSharp } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setSelectedColor } from '../../features/actionsSlice';
 
 const ColorPalette = ({ sltColor, setColor }) => {
-  const dispatch = useDispatch();
   const colorRef = useRef();
 
   const colors = [
@@ -21,8 +18,8 @@ const ColorPalette = ({ sltColor, setColor }) => {
   ];
 
   const handleColorClick = (color) => {
+    console.log(color);
     setColor(color);
-    dispatch(setSelectedColor(color));
   };
 
   useEffect(() => {

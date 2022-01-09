@@ -35,18 +35,21 @@ const ViewNoteModal = ({ close }) => {
     const existingNote = notes.find((note) => note._id === noteId);
 
     if (existingNote) {
+      console.log(existingNote);
       dispatch(setSelectedNote(existingNote));
     }
   }, [dispatch, noteId, notes]);
 
   const saveNoteChanges = () => {
-    const payload = {
-      data: { title, content, color: note.color },
-      noteId: note?._id,
-    };
+    if (note) {
+      const payload = {
+        data: { title, content, color: note.color },
+        noteId: note?._id,
+      };
 
-    dispatch(updateNote(payload));
-    dispatch(updateNoteAsync(payload));
+      dispatch(updateNote(payload));
+      dispatch(updateNoteAsync(payload));
+    }
   };
 
   return (
@@ -58,36 +61,38 @@ const ViewNoteModal = ({ close }) => {
       color={note?.color}
     >
       <ArrowBack color={note.color} close={close} />
-      <NoteInfo color={note.color}>
-        <NoteEditable>
-          <NoteTitle
-            contentEditable="true"
-            role="textbox"
-            aria-multiline="true"
-            dir="ltr"
-            tabIndex="0"
-            suppressContentEditableWarning="true"
-            onBlur={saveNoteChanges}
-            onInput={(e) => setTitle(e.currentTarget.innerText)}
-          >
-            {editTitle}
-          </NoteTitle>
-          <NoteContent
-            contentEditable="true"
-            role="textbox"
-            aria-multiline="true"
-            dir="ltr"
-            tabIndex="0"
-            suppressContentEditableWarning="true"
-            onBlur={saveNoteChanges}
-            onInput={(e) => setContent(e.currentTarget.innerText)}
-          >
-            {editContent}
-          </NoteContent>
-        </NoteEditable>
-        <TimeAgo timestamp={note.createdAt} />
-      </NoteInfo>
-      <NoteMore color={note.color} close={close} note={note} />
+      <Main>
+        <NoteInfo color={note.color}>
+          <NoteEditable>
+            <NoteTitle
+              contentEditable="true"
+              role="textbox"
+              aria-multiline="true"
+              dir="ltr"
+              tabIndex="0"
+              suppressContentEditableWarning="true"
+              onBlur={saveNoteChanges}
+              onInput={(e) => setTitle(e.currentTarget.innerText)}
+            >
+              {editTitle}
+            </NoteTitle>
+            <NoteContent
+              contentEditable="true"
+              role="textbox"
+              aria-multiline="true"
+              dir="ltr"
+              tabIndex="0"
+              suppressContentEditableWarning="true"
+              onBlur={saveNoteChanges}
+              onInput={(e) => setContent(e.currentTarget.innerText)}
+            >
+              {editContent}
+            </NoteContent>
+          </NoteEditable>
+          <TimeAgo timestamp={note.createdAt} />
+        </NoteInfo>
+        <NoteMore color={note.color} close={close} note={note} />
+      </Main>
     </Wrap>
   );
 };
@@ -113,18 +118,28 @@ const Wrap = styled.div`
     border-color: ${(props) => props.color};
   }
 `;
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* max-height: calc(100% - 200px); */
+  overflow-y: auto;
+
+  @media only screen and (max-width: 520px) {
+    max-height: calc();
+  }
+`;
 const NoteInfo = styled.div`
   padding: 20px;
-  max-height: calc(100% - 200px);
-  flex: 1;
   overflow: auto;
   display: flex;
   flex-direction: column;
+  flex: 1;
   color: ${(props) =>
     props.color === '#fff' ? props.theme.textColor : '#fff'};
 
   @media only screen and (max-width: 520px) {
-    max-height: 100%;
+    max-height: calc(100% - 80px);
   }
 `;
 

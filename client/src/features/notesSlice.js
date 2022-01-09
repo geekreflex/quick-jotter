@@ -122,11 +122,10 @@ export const notesSlice = createSlice({
       state.note = action.payload;
     },
     clearSelectedNote(state) {
-      state.note = {};
+      state.note = null;
     },
     switchNoteColor(state, action) {
       const { noteId, color } = action.payload;
-      state.note.color = color;
       const existingNote = state.notes.find((note) => note._id === noteId);
 
       if (existingNote) {
