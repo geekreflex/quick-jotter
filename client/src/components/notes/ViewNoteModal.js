@@ -89,7 +89,7 @@ const ViewNoteModal = ({ close }) => {
               {editContent}
             </NoteContent>
           </NoteEditable>
-          <TimeAgo timestamp={note.createdAt} />
+          <TimeAgo timestamp={note.updatedAt} />
         </NoteInfo>
         <NoteMore color={note.color} close={close} note={note} />
       </Main>
