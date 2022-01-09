@@ -21,6 +21,12 @@ const Wrap = styled.div`
   @media only screen and (min-width: 520px) {
     display: none;
   }
+
+  @media only screen and (max-width: 520px) {
+    position: fixed;
+    top: 0;
+    height: 60px;
+  }
 `;
 
 const Icon = styled.div`

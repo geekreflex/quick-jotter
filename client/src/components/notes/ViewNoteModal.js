@@ -61,38 +61,37 @@ const ViewNoteModal = ({ close }) => {
       color={note?.color}
     >
       <ArrowBack color={note.color} close={close} />
-      <Main>
-        <NoteInfo color={note.color}>
-          <NoteEditable>
-            <NoteTitle
-              contentEditable="true"
-              role="textbox"
-              aria-multiline="true"
-              dir="ltr"
-              tabIndex="0"
-              suppressContentEditableWarning="true"
-              onBlur={saveNoteChanges}
-              onInput={(e) => setTitle(e.currentTarget.innerText)}
-            >
-              {editTitle}
-            </NoteTitle>
-            <NoteContent
-              contentEditable="true"
-              role="textbox"
-              aria-multiline="true"
-              dir="ltr"
-              tabIndex="0"
-              suppressContentEditableWarning="true"
-              onBlur={saveNoteChanges}
-              onInput={(e) => setContent(e.currentTarget.innerText)}
-            >
-              {editContent}
-            </NoteContent>
-          </NoteEditable>
-          <TimeAgo timestamp={note.updatedAt} />
-        </NoteInfo>
-        <NoteMore color={note.color} close={close} note={note} />
-      </Main>
+
+      <NoteInfo color={note.color}>
+        <NoteEditable>
+          <NoteTitle
+            contentEditable="true"
+            role="textbox"
+            aria-multiline="true"
+            dir="ltr"
+            tabIndex="0"
+            suppressContentEditableWarning="true"
+            onBlur={saveNoteChanges}
+            onInput={(e) => setTitle(e.currentTarget.innerText)}
+          >
+            {editTitle}
+          </NoteTitle>
+          <NoteContent
+            contentEditable="true"
+            role="textbox"
+            aria-multiline="true"
+            dir="ltr"
+            tabIndex="0"
+            suppressContentEditableWarning="true"
+            onBlur={saveNoteChanges}
+            onInput={(e) => setContent(e.currentTarget.innerText)}
+          >
+            {editContent}
+          </NoteContent>
+        </NoteEditable>
+        <TimeAgo timestamp={note.updatedAt} />
+      </NoteInfo>
+      <NoteMore color={note.color} close={close} note={note} />
     </Wrap>
   );
 };
@@ -118,25 +117,18 @@ const Wrap = styled.div`
     border-color: ${(props) => props.color};
   }
 `;
-
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-`;
 const NoteInfo = styled.div`
   padding: 20px;
   overflow: auto;
   display: flex;
   flex-direction: column;
-  flex: 1;
 
   color: ${(props) =>
     props.color === '#fff' ? props.theme.textColor : '#fff'};
 
   @media only screen and (max-width: 520px) {
-    max-height: calc(100% - 80px);
+    margin-top: 60px;
+    max-height: calc(100vh - 140px);
   }
 `;
 

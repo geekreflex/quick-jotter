@@ -223,10 +223,12 @@ const Editable = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 100px);
+  height: calc(100vh - 100px);
 
   @media only screen and (max-width: 520px) {
     margin-bottom: 0;
+    margin-top: 60px;
+    height: calc(100vh - 170px);
   }
 
   .hide {
